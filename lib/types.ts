@@ -1,12 +1,21 @@
 export type ThreadInfo = {
-    name: String,
-    description: String,
-    id: String
+    name: string,
+    description: string,
+    id: string
 }
 
 export type MessageInfo = {
-    senderNick: String,
-    authorNick: String,
-    value: String,
-    id: String
+    senderNick: string,
+    authorNick: string,
+    value: string,
+    id: string
 }
+
+export type UserInfo = {
+    id: string
+    firstName: string,
+    lastName: string,
+    email: string,
+    nickName: string,
+}
+

@@ -1,13 +1,6 @@
-import { Inter as FontSans } from "next/font/google";
-
-import { cn } from "@/lib/utils";
 import Title from "@/components/title";
 import Popular from "@/components/popular";
 
-const fontSans = FontSans({
-  subsets: ["latin"],
-  variable: "--font-sans",
-});
 
 export default function Home() {
   return (

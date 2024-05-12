@@ -1,12 +1,13 @@
-import BreadGenerator from "@/components/bread-generator";
+import BreadGenerator from "@/components/breadGenerator";
 import SearchBar from "@/components/forum/searchbar";
-import MessageCard from "@/components/message";
+import MessageGroup from "@/components/messageGroup";
+import MessageInput from "@/components/messageInput";
 import ThreadList from "@/components/threadList";
 
 export default function Forum(){
     return (
       <>
-        <div className="w-full grow flex flex-col items-center py-16">
+        <div className="w-full grow h-full flex flex-col px-2 py-4 items-center">
           <div className="w-[80%] flex flex-col space-y-4 items-center">
             <SearchBar />
             <div className="w-full">
@@ -19,8 +20,11 @@ export default function Forum(){
                 { name: "TEST3", description: "TEST3", id: "3" },
               ]}
             ></ThreadList>
-            <MessageCard data={{value: "test", senderNick:"test1", authorNick:"test2", id: "test3"}} />
+            <MessageGroup></MessageGroup>
+            <MessageGroup></MessageGroup>
+            <span className="h-24"></span>
           </div>
+          <MessageInput />
         </div>
       </>
     );

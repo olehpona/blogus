@@ -1,6 +1,4 @@
 "use client"
-
-
 import { useRef } from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
@@ -10,9 +8,14 @@ export default function SearchBar(){
 
     return (
       <>
-        <div className="w-full flex space-x-2">
-          <Input ref={inputRef} type="text" placeholder="Search" className="grow" />
-          <Button className="w-16">
+        <div className="w-full flex sm:flex-row flex-col sm:space-x-2 sm:space-y-0 space-y-2">
+          <Input
+            ref={inputRef}
+            type="text"
+            placeholder="Search"
+            className="grow"
+          />
+          <Button size="icon" className="sm:w-16 w-full p-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="100%"

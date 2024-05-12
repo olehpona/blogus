@@ -1,0 +1,16 @@
+.md  a {
+    color: grey;
+    text-decoration: underline;
+}
+
+.md  h1 {
+    font-size: 1.5rem;
+}
+
+.md  h2 {
+    font-size: 1.25rem;
+}
+
+.md  h3, h4, h5, h6 {
+    font-size: 1rem;
+}

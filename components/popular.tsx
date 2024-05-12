@@ -1,12 +1,12 @@
-import ThreadCard from "./thread-card";
+import ThreadCard from "./threadCard";
 
-export default function Popular(){
-    return (
-        <>
-        <h2 className="text-xl">Popular threads</h2>
-        <div className="w-1/2">
-            <ThreadCard name="Test" description="Test"></ThreadCard>
-        </div>
-        </>
-    )
+export default function Popular() {
+  return (
+    <>
+      <h2 className="text-xl">Popular threads</h2>
+      <div className="w-1/2">
+        <ThreadCard name="Test" description="Test"></ThreadCard>
+      </div>
+    </>
+  );
 }

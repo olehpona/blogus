@@ -28,7 +28,7 @@ model User {
   firstName   String
   lastName    String
   nickName    String   @unique
-  birthday    DateTime
+  email       String
   password    String
   sended      Message[] @relation("SendedBy")
   created     Message[] @relation("CreatedBy")
@@ -45,5 +45,8 @@ model Message {
   parent Message? @relation("Comments", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   parentId String? @db.ObjectId
   comments Message[] @relation("Comments")
+  likedByIds String[] @db.ObjectId
+  upVotes  Int @default(0)
+  downVotes Int @default(0)
   value String
 }
