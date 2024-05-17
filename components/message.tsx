@@ -22,7 +22,7 @@ export default function MessageCard(props: {
 
   useEffect(() => {
     setContentHeight((contentRef.current as HTMLDivElement).scrollHeight);
-  }, []);
+  });
 
   return (
     <>

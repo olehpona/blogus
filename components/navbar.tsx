@@ -19,7 +19,7 @@ import {
 import SignModal from "./signModal";
 import ProfileSettings from "./profileSetting";
 import { useUserStore } from "@/lib/stores/user";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Guard } from "@/lib/api/guard";
 
 export default function NavBar() {

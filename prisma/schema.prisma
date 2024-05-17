@@ -6,6 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
 }
 
 datasource db {
@@ -40,13 +41,14 @@ model Message {
   senderId String @db.ObjectId
   author User @relation("CreatedBy", fields: [authorId], references: [id])
   authorId String @db.ObjectId
-  thread Thread @relation(fields: [threadId], references: [id])
-  threadId String @db.ObjectId
+  thread Thread? @relation(fields: [threadId], references: [id])
+  threadId String? @db.ObjectId
   parent Message? @relation("Comments", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   parentId String? @db.ObjectId
   comments Message[] @relation("Comments")
-  likedByIds String[] @db.ObjectId
+  replyForId String? @db.ObjectId
+  replyFor Message? @relation("Replys", fields: [replyForId], references: [id], onDelete: NoAction, onUpdate: NoAction) 
+  replys Message[] @relation("Replys")
   upVotes  Int @default(0)
-  downVotes Int @default(0)
   value String
 }

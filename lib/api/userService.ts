@@ -5,17 +5,17 @@ import prisma from "../db"
 import bcrypt from "bcrypt";
 import "dotenv/config";
 
-export async function login(
+export async function signIn(
   email: string,
   password: string
-): Promise<{ status: string; token?: string }> {
+): Promise<{ status: boolean; token?: string }> {
   try {
     return {
-      status: "success",
+      status: true,
       token: await getToken({ email: email, password: password }),
     };
   } catch (e) {
-    return { status: (e as Error).message };
+    return { status: false};
   }
 }
 
@@ -51,7 +51,7 @@ export async function signUp(
 export async function updateUserPassword(
   userId: string,
   password: string
-): Promise<{ status: boolean, message: string }> {
+): Promise<{ state: boolean; message: string }> {
   try {
     const passwordHash = await bcrypt.hash(
       password,
@@ -65,18 +65,23 @@ export async function updateUserPassword(
         password: passwordHash,
       },
     });
-    return { status: true, message:  "success" };
+    return { state: true, message: "success" };
   } catch (e) {
-    return { status: false, message: (e as Error).message };
+    return { state: false, message: (e as Error).message };
   }
 }
 
-export async function updateUserInfo(data: UserInfo): Promise<UserInfo>{
-  let user = await prisma.user.update({where: {id: data.id}, data: {
-    email: data.email,
-    firstName: data.firstName,
-    lastName: data.lastName,
-    nickName: data.nickName
-  }})
-  return user
+export async function updateUserInfo(data: UserInfo): Promise<{state: boolean}>{
+  try{
+    let user = await prisma.user.update({where: {id: data.id}, data: {
+      email: data.email,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      nickName: data.nickName
+    }})
+    return {state: true}
+  } catch (e) {
+    return {state: false}
+  }
+
 }
