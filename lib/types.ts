@@ -2,7 +2,7 @@ export type ThreadInfo = {
     name: string,
     description: string,
     id: string
-    parentId? : string
+    parentId : string| null
 }
 
 export type MessageInfo = {
@@ -11,7 +11,6 @@ export type MessageInfo = {
     value: string,
     id: string,
     upVotes: number,
-    downVotes: number
 }
 
 export type CommentInfo = {

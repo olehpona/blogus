@@ -10,7 +10,10 @@ export async function POST(req: Request) {
       cookiesStore.get("auth_token")?.value as string
     );
     if (payload.state) {
-      cookiesStore.set("auth_token", payload.newToken as string);
+      cookiesStore.set("auth_token", payload.newToken as string, {
+        httpOnly: true,
+        expires: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000),
+      });
       const body = await req.json();
       const apiResponse = await getThreads(body.page, body.parentId)
       if (apiResponse.status) {

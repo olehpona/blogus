@@ -21,6 +21,7 @@ import ProfileSettings from "./profileSetting";
 import { useUserStore } from "@/lib/stores/user";
 import { useEffect } from "react";
 import { Guard } from "@/lib/api/guard";
+import logOut from "@/lib/actions/logout";
 
 export default function NavBar() {
   
@@ -49,19 +50,7 @@ export default function NavBar() {
           <NavigationMenuItem>
             <Link href="/forum">
               <NavigationMenuLink
-                className={
-                  user
-                    ? navigationMenuTriggerStyle()
-                    : navigationMenuTriggerStyle() +
-                      " text-gray-500 hover:text-gray-500 cursor-default"
-                }
-                style={
-                  user
-                    ? {}
-                    : {
-                        backgroundColor: "white",
-                      }
-                }
+                className={navigationMenuTriggerStyle()}
               >
                 Forum
               </NavigationMenuLink>
@@ -78,9 +67,12 @@ export default function NavBar() {
                 {user ? (
                   <>
                     <ProfileSettings></ProfileSettings>
-                    <DropdownMenuItem>Liked</DropdownMenuItem>
-                    <DropdownMenuItem>Posts</DropdownMenuItem>
-                    <DropdownMenuItem>Log out</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => {
+                      (async () => {
+                        await logOut();
+                        setUser(null);
+                      })()
+                    }}>Log out</DropdownMenuItem>
                   </>
                 ) : (
                   <>

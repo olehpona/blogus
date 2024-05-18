@@ -14,7 +14,10 @@ export async function GET(req: Request, context: { params: Params }) {
           cookiesStore.get("auth_token")?.value as string
         );
         if (payload.state) {
-          cookiesStore.set("auth_token", payload.newToken as string);
+      cookiesStore.set("auth_token", payload.newToken as string, {
+        httpOnly: true,
+        expires: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000),
+      });
           const apiResponse = await getParentHierarchy(context.params.thread);
           return NextResponse.json({status: true, data: apiResponse})
         }

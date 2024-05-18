@@ -1,15 +1,16 @@
 import Link from "next/link";
 import { Card, CardDescription, CardTitle } from "./ui/card";
+import { ThreadInfo } from "@/lib/types";
 
-export default function ThreadCard(props: {name: String, description: String}){
+export default function ThreadCard(props: {data: ThreadInfo}){
     return (
-        <Link href="#" className="w-full">
+        <Link href={`/forum/${props.data.id}`} className="w-full">
             <Card className="p-2">
                 <CardTitle>
-                    {props.name}
+                    {props.data.name}
                 </CardTitle>
                 <CardDescription>
-                    {props.description}
+                    {props.data.description}
                 </CardDescription>
             </Card>
         </Link>

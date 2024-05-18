@@ -19,6 +19,7 @@ export default function MessageGroup(){
               senderNick: "test1",
               authorNick: "test2",
               id: "test3",
+              upVotes: 0,
             }}
             className="sticky top-4 shadow-lg"
             commentButtonStateChange={changeCommentState}
@@ -35,12 +36,14 @@ export default function MessageGroup(){
                 senderNick: "test1",
                 authorNick: "test2",
                 id: "test3",
+                upVotes: 0,
               }}
               parent={{
                 value: "test",
                 senderNick: "test1",
                 authorNick: "test2",
                 id: "test3",
+                upVotes: 0,
               }}
             />
             <MessageCard
@@ -49,54 +52,14 @@ export default function MessageGroup(){
                 senderNick: "test1",
                 authorNick: "test2",
                 id: "test3",
+                upVotes: 0,
               }}
               parent={{
                 value: "test",
                 senderNick: "test1",
                 authorNick: "test2",
                 id: "test3",
-              }}
-            />
-            <MessageCard
-              data={{
-                value: "test",
-                senderNick: "test1",
-                authorNick: "test2",
-                id: "test3",
-              }}
-              parent={{
-                value: "test",
-                senderNick: "test1",
-                authorNick: "test2",
-                id: "test3",
-              }}
-            />
-            <MessageCard
-              data={{
-                value: "test",
-                senderNick: "test1",
-                authorNick: "test2",
-                id: "test3",
-              }}
-              parent={{
-                value: "test",
-                senderNick: "test1",
-                authorNick: "test2",
-                id: "test3",
-              }}
-            />
-            <MessageCard
-              data={{
-                value: "test",
-                senderNick: "test1",
-                authorNick: "test2",
-                id: "test3",
-              }}
-              parent={{
-                value: "test",
-                senderNick: "test1",
-                authorNick: "test2",
-                id: "test3",
+                upVotes: 0,
               }}
             />
           </div>

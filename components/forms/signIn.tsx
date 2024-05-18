@@ -89,6 +89,7 @@ export default function SignInForm(props: {setOpen: (state: boolean) => void}) {
               <FormLabel>Password</FormLabel>
               <FormControl>
                 <Input
+                  type="password"
                   className="w-full"
                   placeholder="Password"
                   {...field}

@@ -227,6 +227,7 @@ export default function ProfileForm(props: { data: UserInfo }) {
                   <FormLabel>New Password</FormLabel>
                   <FormControl>
                     <Input
+                      type="password"
                       className="w-full"
                       placeholder="New password"
                       {...field}
@@ -244,6 +245,7 @@ export default function ProfileForm(props: { data: UserInfo }) {
                   <FormLabel>New Password Confirm</FormLabel>
                   <FormControl>
                     <Input
+                      type="password"
                       className="w-full"
                       placeholder="New password confirm"
                       {...field}

@@ -171,6 +171,7 @@ export default function SignUpForm(props: { setOpen: (state: boolean) => void })
               <FormLabel>Password</FormLabel>
               <FormControl>
                 <Input
+                  type="password"
                   className="w-full"
                   placeholder="Password"
                   {...field}
@@ -188,6 +189,7 @@ export default function SignUpForm(props: { setOpen: (state: boolean) => void })
               <FormLabel>Password confirm</FormLabel>
               <FormControl>
                 <Input
+                  type="password"
                   className="w-full"
                   placeholder="Password confirm"
                   {...field}

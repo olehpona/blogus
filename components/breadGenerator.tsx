@@ -14,16 +14,20 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { Fragment, Key } from "react";
+import Link from "next/link";
 
-export default function BreadGenerator(props: { data: string[] }) {
+export default function BreadGenerator(props: { data: {name: string, id: string }[] }) {
+  props.data.unshift({name: "All", id: ""})
   return (
     <>
       <Breadcrumb>
         <BreadcrumbList>
-          {props.data.length > 4 ? (
+          {props.data.length > 2 ? (
             <>
               <BreadcrumbItem>
-                <BreadcrumbLink>{props.data[0]}</BreadcrumbLink>
+                  <BreadcrumbLink href={`/forum/${props.data[0].id}`}>
+                    {props.data[0].name}
+                  </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator>
                 <Slash />
@@ -36,8 +40,10 @@ export default function BreadGenerator(props: { data: string[] }) {
                   <DropdownMenuContent>
                     {props.data.slice(1, props.data.length - 1).map((el) => {
                       return (
-                        <DropdownMenuItem key={el as Key}>
-                          <BreadcrumbLink>{el}</BreadcrumbLink>
+                        <DropdownMenuItem key={el.id as Key}>
+                          <BreadcrumbLink href={el.id}>
+                            {el.name}
+                          </BreadcrumbLink>
                         </DropdownMenuItem>
                       );
                     })}
@@ -48,8 +54,10 @@ export default function BreadGenerator(props: { data: string[] }) {
                 <Slash />
               </BreadcrumbSeparator>
               <BreadcrumbItem>
-                <BreadcrumbLink>
-                  {props.data[props.data.length - 1]}
+                <BreadcrumbLink
+                  href={`/forum/${props.data[props.data.length - 1].id}`}
+                >
+                  {props.data[props.data.length - 1].name}
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator>
@@ -58,9 +66,11 @@ export default function BreadGenerator(props: { data: string[] }) {
             </>
           ) : (
             props.data.map((el) => (
-              <Fragment key={el as Key}>
+              <Fragment key={el.id as Key}>
                 <BreadcrumbItem>
-                  <BreadcrumbLink>{el}</BreadcrumbLink>
+                  <BreadcrumbLink href={`/forum/${el.id}`}>
+                    {el.name}
+                  </BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator>
                   <Slash />

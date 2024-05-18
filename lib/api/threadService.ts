@@ -4,7 +4,7 @@ import { ThreadInfo } from "../types";
 export async function createThread(
   name: string,
   description: string,
-  parentId: string
+  parentId?: string
 ) {
   try {
     const newThread = await prisma.thread.create({
@@ -27,7 +27,7 @@ export async function createThread(
         },
       });
     }
-    return { status: true, message: "Success" };
+    return { status: true, message: "Success", id: newThread.id };
   } catch (e) {
     return { status: false, message: (e as Error).message };
   }
@@ -50,6 +50,7 @@ export async function getParentHierarchy(threadId: string) {
       id: currentThread.id,
       name: currentThread.name,
       description: currentThread.description,
+      parentId: currentThread.description
     });
 
     if (!currentThread.parentId) {
@@ -104,6 +105,11 @@ export async function getThreads(page: number, parentId?: string) {
       const found = await prisma.thread.findMany({
         skip: 5 * page,
         take: 5,
+        where: {
+          parent: {
+            is: null
+          }
+        },
         orderBy: {
           messages: {
             _count: "desc",
