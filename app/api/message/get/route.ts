@@ -9,7 +9,7 @@ export async function POST(req: Request){
     } else if (body.type === "comment"){
         apiResponse = await getComment(body.page, body.messageId);
     } else {
-        return NextResponse.json({status: false}, {status: 417});
+        return NextResponse.json({status: false}, {status: 418});
     }
     if (apiResponse.status){
         return NextResponse.json({status: true, data: apiResponse.data});

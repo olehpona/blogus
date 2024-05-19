@@ -20,17 +20,14 @@ export default function ThreadList(props: {
   collapsed?: boolean;
   id?: string;
 }) {
-  let page = 0;
+  let page = 1;
   const [items, setItems] = useState(props.data);
   const [message, setMessage] = useState("");
   const [addOpen, setAddOpen] = useState(false);
 
   function load() {
-    loadMore(items, page+1, props.id).then((data) => {
+    loadMore(items, page++, props.id).then((data) => {
       if (data.status) {
-        if ((data.data as ThreadInfo[]).length > 0){
-          page++;
-        } 
         setItems(data.data as ThreadInfo[]);
       } else {
         setMessage(data.message as string);

@@ -1,5 +1,5 @@
 "use client"
-import { create, type StoreApi, useStore } from "zustand";
+import { type StoreApi, useStore } from "zustand";
 import { createStore } from 'zustand/vanilla'
 import { UserInfo } from "../types";
 import { createContext, type ReactNode, useContext, useRef } from "react";

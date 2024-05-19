@@ -2,8 +2,10 @@ import BreadGenerator from "@/components/breadGenerator";
 import SearchBar from "@/components/forum/searchbar";
 import MessageGroup from "@/components/messageGroup";
 import MessageInput from "@/components/messageInput";
+import MessageList from "@/components/messageList";
 import SearchModal from "@/components/searchModal";
 import ThreadList from "@/components/threadList";
+import { getMessageAction } from "@/lib/actions/message";
 import { getParentHierarchy, getThreads } from "@/lib/api/threadService";
 import { ThreadInfo } from "@/lib/types";
 
@@ -12,6 +14,7 @@ export default async function Forum({ params }: { params: { id: string } }) {
     .map((thread) => ({ name: thread.name, id: thread.id }))
     .reverse();
   const threads = await getThreads(0, params.id);
+  const messages = await getMessageAction([], 0, params.id);
   return (
     <>
       <div className="w-full grow h-full flex flex-col px-2 py-4 items-center">
@@ -24,9 +27,10 @@ export default async function Forum({ params }: { params: { id: string } }) {
             data={threads.status ? (threads.data as ThreadInfo[]) : []}
             id={params.id}
           />
+          <MessageList threadId={params.id} init={messages.data? messages.data: []}/>
           <span className="h-24"></span>
         </div>
-        <MessageInput />
+        <MessageInput threadId={params.id} />
       </div>
     </>
   );

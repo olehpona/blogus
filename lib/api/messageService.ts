@@ -233,6 +233,12 @@ export async function getComment(page: number, messageId: string){
         replyFor: {
           select: {
             id: true,
+            sender: {
+              select: {
+                nickName: true
+              }
+            },
+            value: true
           },
         },
       },

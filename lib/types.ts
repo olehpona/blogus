@@ -11,6 +11,12 @@ export type MessageInfo = {
     value: string,
     id: string,
     upVotes: number,
+    parentId?: string,
+    replyFor? : {
+        nickName: string,
+        id: string,
+        value: string
+    }
 }
 
 export type CommentInfo = {

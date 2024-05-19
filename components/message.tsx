@@ -1,32 +1,37 @@
 "use client";
 import { MessageInfo } from "@/lib/types";
 import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
-import { ArrowDown, ArrowUp, ChevronsUpDown, MessageSquareReply, } from "lucide-react";
+import {
+  ArrowDown,
+  ArrowUp,
+  ChevronsUpDown,
+  MessageSquareReply,
+} from "lucide-react";
 import { Button } from "./ui/button";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import "./styles/Markdown.css";
 import { useEffect, useRef, useState } from "react";
 import { useCommentStore } from "@/lib/stores/comment";
+import upVoteAction from "@/lib/actions/upVote";
 
 export default function MessageCard(props: {
   data: MessageInfo;
   className?: string;
   commentButtonStateChange?: (state?: boolean) => void;
-  parent?: MessageInfo;
 }) {
   const [expanded, setExpanded] = useState(false);
   const [contentHeight, setContentHeight] = useState(-1);
   const contentRef = useRef<HTMLDivElement>(null);
-  const setComment = useCommentStore((state) => state.setComment);
+  const setData = useCommentStore((state) => state.set);
 
   useEffect(() => {
     setContentHeight((contentRef.current as HTMLDivElement).scrollHeight);
-  },[]);
+  }, []);
 
   return (
     <>
-      <Card className={"w-full " + props.className}>
+      <Card id={props.data.id} className={"w-full " + props.className}>
         <CardHeader className="text-sm flex-row space-y-0 space-x-3 w-full">
           {props.data.authorNick !== props.data.senderNick ? (
             <>
@@ -46,6 +51,19 @@ export default function MessageCard(props: {
                 <span className="font-medium">{props.data.senderNick}</span>
               </p>
             </>
+          )}
+          {props.data.replyFor ? (
+            <p>
+              Reply for:{" "}
+              <a href={`#${props.data.replyFor.id}`}>
+                <span className="font-medium">
+                  {props.data.replyFor.nickName}
+                </span>{" "}
+                {props.data.replyFor.value}
+              </a>
+            </p>
+          ) : (
+            <></>
           )}
         </CardHeader>
         <CardContent>
@@ -90,16 +108,21 @@ export default function MessageCard(props: {
             >
               <ChevronsUpDown></ChevronsUpDown>
             </Button>
-            <Button onClick={() => setComment(props.data)} variant="outline" size="icon">
+            <Button
+              onClick={() =>
+                props.commentButtonStateChange
+                  ? setData(props.data, "comment")
+                  : setData(props.data, "reply")
+              }
+              variant="outline"
+              size="icon"
+            >
               <MessageSquareReply />
             </Button>
           </div>
           <div className="flex space-x-2 sm:mb-0 mb-2 sm:justify-normal justify-between w-full sm:w-auto">
-            <Button variant="outline" size="icon">
-              <ArrowUp />
-            </Button>
-            <Button variant="outline" size="icon">
-              <ArrowDown />
+            <Button onClick={() => upVoteAction(props.data.id)} variant="outline" size="icon">
+              <ArrowUp /> <span>{props.data.upVotes}</span>
             </Button>
           </div>
         </CardFooter>

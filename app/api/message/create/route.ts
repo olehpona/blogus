@@ -30,13 +30,13 @@ export async function POST(req: Request) {
         );
       } else if (body.type === "reply") {
         apiResponse = await reply(
+          body.replyFor,
           body.messageId,
-          body.parentId,
           payload.data?.id as string,
           body.value
         );
       } else {
-        return NextResponse.json({ status: false }, { status: 417 });
+        return NextResponse.json({ status: false }, { status: 418 });
       }
       if (apiResponse.status) {
         return NextResponse.json({ status: true, message: "Success" });
