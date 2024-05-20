@@ -7,6 +7,8 @@ import ThreadList from "@/components/threadList";
 import { getParentHierarchy, getThreads } from "@/lib/api/threadService";
 import { ThreadInfo } from "@/lib/types";
 
+export const revalidate = 360;
+
 export default async function Forum() {
   const threads = await getThreads(0);
   return (

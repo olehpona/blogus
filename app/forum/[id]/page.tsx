@@ -1,6 +1,4 @@
 import BreadGenerator from "@/components/breadGenerator";
-import SearchBar from "@/components/forum/searchbar";
-import MessageGroup from "@/components/messageGroup";
 import MessageInput from "@/components/messageInput";
 import MessageList from "@/components/messageList";
 import SearchModal from "@/components/searchModal";
@@ -8,6 +6,8 @@ import ThreadList from "@/components/threadList";
 import { getMessageAction } from "@/lib/actions/message";
 import { getParentHierarchy, getThreads } from "@/lib/api/threadService";
 import { ThreadInfo } from "@/lib/types";
+
+export const revalidate = 360
 
 export default async function Forum({ params }: { params: { id: string } }) {
   const hierarchy = (await getParentHierarchy(params.id))

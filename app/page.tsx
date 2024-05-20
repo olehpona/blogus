@@ -1,6 +1,7 @@
 import Title from "@/components/title";
 import Popular from "@/components/popular";
 
+export const revalidate = 360;
 
 export default function Home() {
   return (
