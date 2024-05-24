@@ -8,6 +8,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "./ui/form";
+import { useUserStore } from "@/lib/stores/user";
 
 export default function MessageInput(props: {threadId: string}) {
   const [comment,type, setData, clearData] = useCommentStore((state) => [
@@ -20,6 +21,8 @@ export default function MessageInput(props: {threadId: string}) {
   const formSchema = z.object({
     message: z.string().min(1, {message: "Please write some text"}).max(5000, {message: "Max length 5000 symbols"})
   })
+
+  const user = useUserStore((state) => state.user);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -96,6 +99,7 @@ export default function MessageInput(props: {threadId: string}) {
               />
               <div className="sm:h-20 h-8 sm:w-[10%] w-full">
                 <Button
+                  disabled={!user}
                   type="submit"
                   size="custom"
                   className="w-full h-full"
